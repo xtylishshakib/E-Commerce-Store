@@ -1,0 +1,38 @@
+<!-- templates/home.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My E-Commerce Store</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div style="text-align: right;">
+        {% if user.is_authenticated %}
+            Welcome, {{ user.username }} | 
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a> | 
+            <a href="{% url 'register' %}">Register</a>
+        {% endif %}
+    </div>
+    <h1>Product Listings</h1>
+    <div style="display: flex; flex-wrap: wrap;">
+        {% for product in products %}
+            <div style="border: 1px solid #ccc; padding: 10px; margin: 10px; width: 280px;">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" width="100%">
+                {% endif %}
+                <a href="{% url 'product_detail' product.id %}">
+                    <h2>{{ product.name }}</h2>
+                </a>
+                <p>{{ product.description|truncatechars:100 }}</p>
+                <p><strong>Price:</strong> ₹{{ product.price }}</p>
+                <a href="{% url 'add_to_cart' product.id %}">
+                    <button>Add to Cart</button>
+                </a>
+
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

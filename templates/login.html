@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        .container{
+            max-width:400px;
+            margin:50px auto;
+            padding:20px;
+            border:1px solid #816a6a;
+            background-color: #bd7;
+            border-radius: 10px;
+        }
+        .form-group{
+            margin-bottom:20px;
+        }
+        label{
+            display:block;
+            margin-bottom:5px;
+        }
+        input{
+            width:95%;
+            padding:10px;
+            border:1px solid #ccc;
+            border-radius:5px;
+            font-weight:bold;
+        }
+        button{
+            padding:10px 20px;
+            background-color:green;
+            color:#fff;
+            border-radius:5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label>Username:</label>
+            <input type="text" name="username" required><br><br>
+
+            <label>Password:</label>
+            <input type="password" name="password" required><br><br>
+
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+    <div>
+</body>
+</html>
